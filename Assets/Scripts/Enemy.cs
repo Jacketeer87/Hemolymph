@@ -6,10 +6,10 @@ public class Enemy : MonoBehaviour
 {
 
     [Header("Stats")]
-    [SerializeField] float speed = 3f;
-    [SerializeField] float rSpeed = 200f;
-    [SerializeField] float rotAngle = 0f;
-    public int startHealth = 10;
+    [SerializeField] public float speed = 3f;
+    [SerializeField] public float rSpeed = 200f;
+    [SerializeField] public float damage = 10f;
+    [SerializeField] public int startHealth = 10;
     Health enemyHealth;
 
 
@@ -17,9 +17,11 @@ public class Enemy : MonoBehaviour
     //[SerializeField] layerMask wallMask;
     //[SerializeField] layerMask floorMask;
     //[SerializeField] layerMask element;
+    public float detectionRange = 10f;
+    public string targetTag = "entity"; // Tag to search for
 
     [Header("Flavor")]
-    //[SerializeField] string bugType = "n/a";
+    [SerializeField] string bugType = "termite";
 
     //[Header("Tracked Data")]
 
@@ -53,8 +55,27 @@ public class Enemy : MonoBehaviour
         transform.localRotation = Quaternion.Slerp(transform.localRotation, q, rSpeed);
     }
 
-    private void GetTarget(){
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+    void GetTarget()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange); // Search area around the enemy
+
+        float shortestDistance = Mathf.Infinity;
+        GameObject nearestTarget = null;
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag(targetTag))
+            {
+                float distanceToTarget = Vector3.Distance(transform.position, collider.transform.position);
+                if (distanceToTarget < shortestDistance)
+                {
+                    shortestDistance = distanceToTarget;
+                    nearestTarget = collider.gameObject;
+                }
+            }
+        }
+
+        target = nearestTarget != null ? nearestTarget.transform : null;
     }
 
     private void OnCollisionEnter2D(Collision2D other){

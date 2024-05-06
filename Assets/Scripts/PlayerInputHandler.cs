@@ -6,8 +6,12 @@ public class PlayerInputHandler : MonoBehaviour
 {
 
     [SerializeField] PlayerBug bug;
+    [SerializeField] MeleeAttack melee;
+    ProjectileThrower thrower;
     
-    // Update is called once per frame
+    void Start(){
+        thrower = bug.GetComponent<ProjectileThrower>();
+    }
     void FixedUpdate()
     {   
         
@@ -34,11 +38,26 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         if(Input.GetKey(KeyCode.E) || Input.GetMouseButton(0)){
-            //bug.bugAttack();
+            melee.bugAttack();
+        }
+
+        if(Input.GetKey(KeyCode.Q) || Input.GetMouseButton(1)){
+            float rotAngleInDegrees = bug.rotAngle;
+            Vector3 launchDirection = AngleToDirection(rotAngleInDegrees);
+            thrower.Launch(launchDirection);
         } 
 
 
         bug.moveBug(input);
     
+    }
+
+    Vector3 AngleToDirection(float angleInDegrees)
+    {
+        float angleInRadians = angleInDegrees * Mathf.Deg2Rad; // Convert degrees to radians
+        // Calculate directional vector components based on angle
+        float x = Mathf.Sin(angleInRadians);
+        float z = Mathf.Cos(angleInRadians);
+        return new Vector3(x, 0, z); // y is 0 since we're assuming movement on the x-z plane
     }
 }

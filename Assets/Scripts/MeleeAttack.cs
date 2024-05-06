@@ -26,7 +26,7 @@ public class MeleeAttack : MonoBehaviour
     public void bugAttack(){
         melee.SetActive(true);
         //call animator to play attack
-
+        Debug.Log("Hiya");
         atkTimer += Time.deltaTime;
         if(atkTimer >= atkDuration){
             atkTimer = 0;

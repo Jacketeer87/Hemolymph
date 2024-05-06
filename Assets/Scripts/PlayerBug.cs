@@ -7,17 +7,18 @@ using TMPro;
 public class PlayerBug : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] float speed = 0f;
-    [SerializeField] float rSpeed = 200f;
+    [SerializeField] public float speed = 0f;
+    [SerializeField] public float rSpeed = 200f;
     
-    [SerializeField] float rotAngle = 0f;
-    [SerializeField] float damage = 1f;
+    [SerializeField] public float rotAngle = 0f;
+    [SerializeField] public float damage = 1f;
 
 
     [Header("Physics")]
     //[SerializeField] layerMask wallMask;
     //[SerializeField] layerMask floorMask;
     //[SerializeField] layerMask element;
+    
 
     [Header("Flavor")]
     [SerializeField] string bugType = "n/a";
@@ -36,6 +37,7 @@ public class PlayerBug : MonoBehaviour
     public Transform aim;
     public int startHealth = 10;
     Health playerHealth;
+    
 
 
     
@@ -75,6 +77,12 @@ public class PlayerBug : MonoBehaviour
         aim.rotation = newRotation;
 
     }
+
+    public void webShot(){
+        
+    }
+    
+    
 
     //Keep track of float
     //+speed*Time.deltaTime
