@@ -36,11 +36,14 @@ public class MeleeAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Attack applied"+collision.gameObject.name);
         //take damage
         if(collision.GetComponent<Health>() != null){
+            Debug.Log("Accessed collision");
             if(collision != self){
-                collision.GetComponent<Health>().takeDamage(damage); //damage
-            }
+                collision.GetComponent<Health>().TakeDamage(damage); //damage
+                Debug.Log("Applied damage");
+          }
             //Check collision is not player/thing creating attack
         }
     }

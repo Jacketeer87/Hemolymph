@@ -2585,6 +2585,11 @@ MonoBehaviour:
   rightDoor: {fileID: 6803327733482497354}
   EnemyList:
   - {fileID: 753596365135265369, guid: d1ab2dee23d041a439f667a082a67fa9, type: 3}
+  Terrain:
+  - {fileID: 3887285844520600093, guid: c13ffd43b775fd44bb8164dfad3c92c4, type: 3}
+  Spawnpoint: {fileID: 0}
+  height: 16
+  width: 30
 --- !u!1 &2399452844229520829
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3891369858853239152}
   - component: {fileID: 2718884956312661069}
   - component: {fileID: 6339042978788146678}
+  - component: {fileID: 1428858738350078290}
   m_Layer: 0
   m_Name: Webarea
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 1732315966170538188}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9464, y: -1.5217, z: 0}
-  m_LocalScale: {x: 1.7465, y: 1.7835, z: 1}
+  m_LocalPosition: {x: -0.6353, y: -1.8145, z: 0}
+  m_LocalScale: {x: 2.3789077, y: 2.3601055, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -130,3 +131,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.984, y: 1.015742}
   m_EdgeRadius: 0
+--- !u!114 &1428858738350078290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732315966170538188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8be6394ce703e2f4eb2b27f2a2636a53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  melee: {fileID: 1732315966170538188}
+  atkDuration: 0.3
+  atkTimer: 0
+  damage: 5
+  self: {fileID: 0}

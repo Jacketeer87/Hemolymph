@@ -1,40 +1,60 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    //health stored here
-    public int currHealth;
-    public int MaxHealth;
+    public int maxHealth; //external max health
+    public int currentHealth = 1; // Current health
+    public bool dead = false;
+    public float timer = 0f;
+    public float interval = 2f;
+    [SerializeField] GameManager gm;
 
-    // Start is called before the first frame update
-    void Start()
+
+    void Update(){
+        timer += Time.deltaTime;
+    }
+    public void Initialize(int initialMaxHealth)
     {
-        
+        maxHealth = initialMaxHealth; // Set max health externally
+        currentHealth = maxHealth; // Initialize health
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int amount)
     {
-        
-    }
-
-    public void setHealth(int hAmount){
-        currHealth = hAmount;
-
-    }
-
-    public void takeDamage(int dAmount){
-        currHealth -= dAmount;
-        Debug.Log("Ouch");
-
-        if(currHealth <= 0){
-            Destroy(gameObject);
+        currentHealth -= amount; // Reduce health
+        Debug.Log(gameObject.name + " takes " + amount + " damage.");
+        if(gameObject.tag == "Player"){
+            EnemyCounter.singleton.SubtractHealth(amount);
+        }
+        if (currentHealth <= 0)
+        {
+            Die(); // Call the Die method if health is 0 or less
         }
     }
 
+    public void Heal(int amount)
+    {
+        currentHealth += amount; // Increase health
+        currentHealth = Mathf.Min(currentHealth, maxHealth); // Prevent health from going over max
+        Debug.Log(gameObject.name + " heals " + amount + " health.");
+    }
 
+    void Die()
+    {
+        Debug.Log(gameObject.name + " died.");
+        if(gameObject.tag == "Player"){
+            Destroy(gameObject);
+            gm.GameOver();
+        }
+        else{
+        gameObject.GetComponent<AudioSource>().Play();
+        Destroy(gameObject);
+        EnemyCounter.singleton.enemyKill();
+        dead = true;
+        }
+    }
 
-
+    public bool IsDead(){
+        return dead;
+    }
 }

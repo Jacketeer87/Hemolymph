@@ -6,6 +6,7 @@ TagManager:
   tags:
   - entity
   - pMelee
+  - Enemy
   layers:
   - Default
   - TransparentFX

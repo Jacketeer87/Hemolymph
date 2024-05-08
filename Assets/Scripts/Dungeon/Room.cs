@@ -43,18 +43,44 @@ public class Room : MonoBehaviour
 
     public void Spawn(Vector2 center)
     {
-        //GameObject enemy = (GameObject)Instantiate()
+        int choice = Random.Range(0, 100);
+
+        if(choice % 2 == 0)
+        {
+            GetRandomEnemy(center);
+        }
+        else
+        {
+            GetRandomTerrain(center);
+        }
     }
 
     public Vector2 GetCenterOfWalls()
     {
-        // Get the average x transform.position
+        //get avg center X coordinate
         float centerX = (topDoor.transform.position.x + bottomDoor.transform.position.x + leftDoor.transform.position.x + rightDoor.transform.position.x) / 4;
-        // Get the average y transform.position
+
+        //get avg center Y coordinate
         float centerY = (topDoor.transform.position.y + bottomDoor.transform.position.y + leftDoor.transform.position.y + rightDoor.transform.position.y) / 4;
 
-        // Return the center point as a Vector2
+        //return center
         return new Vector2(centerX, centerY);
+    }
+
+    public void GetRandomEnemy(Vector2 center)
+    {
+        int index = Random.Range(0, EnemyList.Count);
+        
+        Instantiate(EnemyList[index], center, Quaternion.identity);
+        EnemyCounter.singleton.CountEnemy();
+
+
+    }
+
+    public void GetRandomTerrain(Vector2 center)
+    {
+        int index = Random.Range(0, Terrain.Count);
+        Instantiate(Terrain[index], center, Quaternion.identity);
     }
 
 }

@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuHandler : MonoBehaviour
 {
-    [SerializeField] private ScreenTransition screenTransition;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +18,7 @@ public class MainMenuHandler : MonoBehaviour
     }
 
     public void Play(){
-        screenTransition.ThatsAllFolks("GameScene");
+        SceneManager.LoadScene("CharacterSelect");
     }
 
     public void Quit(){
